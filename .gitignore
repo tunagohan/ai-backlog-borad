@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+
+# Backend
+backend/.bundle
+backend/log/*
+backend/tmp/*
+backend/.env*
+backend/vendor/bundle
+
+# Frontend
+frontend/node_modules
+frontend/.nuxt
+frontend/.output
+frontend/.env*

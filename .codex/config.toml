@@ -1,0 +1,10 @@
+# Project-scoped Codex configuration (optional)
+# Ref: https://developers.openai.com/codex/config-basic/
+
+# Ask before running generated commands unless explicitly safe
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+# Web search mode (Research thread may want "live")
+web_search = "cached"
+# web_search = "live"
