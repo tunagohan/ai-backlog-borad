@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_18_000012) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_18_000013) do
   create_table "assets", force: :cascade do |t|
     t.integer "space_id", null: false
     t.string "name", null: false
@@ -122,6 +122,21 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_18_000012) do
     t.index ["job_id"], name: "index_issues_on_job_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "company_id", null: false
+    t.string "level", default: "info", null: false
+    t.string "title", null: false
+    t.text "message"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id", "created_at"], name: "index_notifications_on_company_id_and_created_at"
+    t.index ["company_id"], name: "index_notifications_on_company_id"
+    t.index ["resource_type", "resource_id"], name: "index_notifications_on_resource_type_and_resource_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.integer "company_id", null: false
     t.string "name", null: false
@@ -159,6 +174,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_18_000012) do
   add_foreign_key "inspection_templates", "companies"
   add_foreign_key "issues", "companies"
   add_foreign_key "issues", "inspection_jobs", column: "job_id"
+  add_foreign_key "notifications", "companies"
   add_foreign_key "properties", "companies"
   add_foreign_key "spaces", "stores"
   add_foreign_key "stores", "properties"

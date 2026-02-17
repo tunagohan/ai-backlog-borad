@@ -365,3 +365,35 @@
 - `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` 成功
 - `cd frontend && npm ci` 実行
 - `cd frontend && npm install && npm run build` 成功
+
+---
+
+## Phase2 Step3 Update (In-app notifications)
+
+### Scope
+- 通知チャネルの最小対応としてアプリ内通知を追加。
+
+### Backend changes
+- migration:
+  - `20260218000013_create_notifications.rb`
+- model:
+  - `Notification`（`level: info/warning/critical`, `read_at`）
+- API:
+  - `GET /api/v1/notifications?company_id=...&unread=true|false`
+  - `PATCH /api/v1/notifications/:id`（既読化）
+- 連携:
+  - issue作成/更新時に通知を自動生成
+
+### Frontend changes
+- 追加APIモジュール:
+  - `frontend/lib/api/notifications.ts`
+- 追加画面:
+  - `/notifications`（未読フィルタ、既読ボタン）
+- 導線:
+  - トップページに通知一覧リンク追加
+
+### Verification
+- `cd backend && bundle exec rails db:migrate` 成功
+- `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` 成功
+- `cd frontend && npm ci` 実行
+- `cd frontend && npm install && npm run build` 成功

@@ -147,3 +147,16 @@ export type DashboardSummary = {
   }
   properties: DashboardPropertySummary[]
 }
+
+export type Notification = {
+  id: number
+  company_id: number
+  level: 'info' | 'warning' | 'critical'
+  title: string
+  message: string | null
+  resource_type: string | null
+  resource_id: number | null
+  read_at: string | null
+  created_at: string
+  updated_at: string
+}

@@ -17,6 +17,7 @@ function goToProperties() {
       <NuxtLink to="/tasks">点検ジョブ一覧へ</NuxtLink>
       <NuxtLink to="/issues">不具合一覧へ</NuxtLink>
       <NuxtLink to="/dashboard">オーナーダッシュボードへ</NuxtLink>
+      <NuxtLink to="/notifications">通知一覧へ</NuxtLink>
       <form @submit.prevent="goToProperties">
         <label>
           Company ID
