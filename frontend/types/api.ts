@@ -135,6 +135,7 @@ export type DashboardPropertySummary = {
   latest_inspection_job_id: number | null
   latest_inspection_at: string | null
   open_issue_count: number
+  avg_resolution_hours: number | null
 }
 
 export type DashboardSummary = {
@@ -144,6 +145,7 @@ export type DashboardSummary = {
     property_count: number
     open_issue_count: number
     completed_job_count: number
+    avg_resolution_hours: number | null
   }
   properties: DashboardPropertySummary[]
 }
