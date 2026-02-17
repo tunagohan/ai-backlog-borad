@@ -517,8 +517,6 @@
 - `.github/workflows/ci.yml` に Playwright Chromium インストールステップを追加。
 
 ### Verification
-- CIで `frontend` ジョブ時に browser install + `npm run test` を実行する構成へ変更。
 - Playwright webServer は `build + preview` 起動に変更し、CI安定性を優先。
 - 現時点は CI安定性優先で `test:e2e` の手動実行運用に変更（`test` スクリプト連動実行は解除）。
-- workflow差分は最小化し、Nuxt4ビルド時の `oxc` optional binding を検査して不足時のみ補完する構成へ調整。
-- frontend CIのNodeを `24` へ更新（Nuxt4 + eslint10 のengine要件を余裕を持って満たす）。
+- frontend CIの依存導入は `npm ci` 後に `npm install` を補完実行し、Nuxt4のoptional依存欠落を低減。

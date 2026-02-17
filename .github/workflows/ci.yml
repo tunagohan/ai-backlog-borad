@@ -100,6 +100,7 @@ jobs:
           else
             npm install
           fi
+          npm install --prefer-offline --no-fund --no-audit || true
 
       - name: Lint (if script exists)
         if: steps.detect.outputs.present == 'true'
