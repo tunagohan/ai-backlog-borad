@@ -15,4 +15,14 @@ class Issue < ApplicationRecord
   }, validate: true
 
   validates :title, presence: true
+
+  def image_urls_array
+    JSON.parse(image_urls)
+  rescue JSON::ParserError
+    []
+  end
+
+  def image_urls_array=(value)
+    self.image_urls = Array(value).reject(&:blank?).to_json
+  end
 end

@@ -120,6 +120,7 @@ export type Issue = {
   job_id: number
   title: string
   description: string | null
+  image_urls: string[]
   severity: 'low' | 'medium' | 'high'
   status: 'open' | 'in_progress' | 'closed'
   reported_at: string

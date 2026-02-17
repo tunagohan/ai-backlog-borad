@@ -10,7 +10,9 @@ module Api
       end
 
       def create
-        issue = Issue.create!(issue_params.merge(reported_at: Time.current))
+        issue = Issue.new(issue_params.except(:image_urls).merge(reported_at: Time.current))
+        issue.image_urls_array = issue_params[:image_urls]
+        issue.save!
         record_audit!(
           company_id: issue.company_id,
           action: "issue_reported",
@@ -23,7 +25,10 @@ module Api
 
       def update
         issue = Issue.find(params[:id])
-        issue.update!(update_params)
+        attrs = update_params.except(:image_urls)
+        issue.assign_attributes(attrs)
+        issue.image_urls_array = update_params[:image_urls] if update_params.key?(:image_urls)
+        issue.save!
         issue.update!(resolved_at: Time.current) if issue.closed? && issue.resolved_at.nil?
         record_audit!(
           company_id: issue.company_id,
@@ -38,11 +43,11 @@ module Api
       private
 
       def issue_params
-        params.require(:issue).permit(:company_id, :job_id, :title, :description, :severity)
+        params.require(:issue).permit(:company_id, :job_id, :title, :description, :severity, image_urls: [])
       end
 
       def update_params
-        params.require(:issue).permit(:status, :severity, :title, :description)
+        params.require(:issue).permit(:status, :severity, :title, :description, image_urls: [])
       end
 
       def issue_payload(issue)
@@ -52,6 +57,7 @@ module Api
           job_id: issue.job_id,
           title: issue.title,
           description: issue.description,
+          image_urls: issue.image_urls_array,
           severity: issue.severity,
           status: issue.status,
           reported_at: issue.reported_at,

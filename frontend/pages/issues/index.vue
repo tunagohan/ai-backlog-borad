@@ -68,6 +68,7 @@ await load()
           <th>ID</th>
           <th>Job</th>
           <th>Title</th>
+          <th>Images</th>
           <th>Severity</th>
           <th>Status</th>
           <th>Action</th>
@@ -78,6 +79,7 @@ await load()
           <td>{{ issue.id }}</td>
           <td>{{ issue.job_id }}</td>
           <td>{{ issue.title }}</td>
+          <td>{{ issue.image_urls.length }}</td>
           <td>{{ issue.severity }}</td>
           <td>{{ issue.status }}</td>
           <td>
