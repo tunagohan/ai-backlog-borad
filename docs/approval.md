@@ -1,6 +1,6 @@
 # Approval Gate
 
-status: pending  # pending | approved
+status: approved  # pending | approved
 
 ## What is approved?
 - `docs/po.md` のスコープとAC
