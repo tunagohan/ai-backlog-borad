@@ -93,3 +93,65 @@
 ### Failures and Fixes
 - `git checkout ...` 初回実行で sandbox 制約により `.git/worktrees/.../index.lock` 作成失敗。
 - 修正: 権限昇格で同コマンドを再実行し、docs取り込みを完了。
+
+---
+
+## Build Start Update (approved after DISCOVERY)
+
+### Input Prompt (summary)
+- `docs/approval.md` が `approved` になったため、BUILDフェーズへ着手。
+- M1（Setup Foundation）として、Company/Property/Store/Space/Asset の基盤APIと最小UIを実装開始。
+
+### Implemented
+- Backend (Rails API)
+  - `api/v1` に階層登録の Create/List/Show エンドポイントを追加。
+  - `Company/Property/Store/Space/Asset` のモデル・関連・バリデーションを追加。
+  - 階層テーブルのmigrationを追加。
+  - `ApplicationController` に `404` / `422` の共通エラーレスポンスを追加。
+- Frontend (Nuxt skeleton)
+  - ルート: `/`, `/companies/new`, `/properties`
+  - API client共通化 (`frontend/lib/api/client.ts`) と会社/物件APIモジュール追加。
+  - 会社登録フォームと物件一覧の最小画面を追加。
+
+### Commands Executed
+- `bash scripts/bootstrap.sh`
+- `find backend -maxdepth 3 -type f | sort`
+- `find frontend -maxdepth 3 -type f | sort`
+- `sed -n '1,220p' backend/config/routes.rb`
+- `sed -n '1,240p' backend/Gemfile`
+- `sed -n '1,220p' backend/app/controllers/application_controller.rb`
+- `sed -n '1,220p' backend/config/application.rb`
+- `sed -n '1,260p' backend/config/database.yml`
+- `ruby -c backend/app/controllers/api/v1/*.rb`
+- `ruby -c backend/app/models/*.rb`
+
+### Failures and Fixes
+- `bootstrap.sh` で `bundle install` が権限/ネットワーク制約で失敗（`bundler.lock`作成不可、`rubygems.org` 到達不可）。
+- `npx nuxi@latest init frontend` が `registry.npmjs.org ENOTFOUND` で失敗。
+- 修正: 外部依存インストールは保留し、実装コード（Rails/Nuxtの最小構成）を手動で作成して着手を継続。
+
+### Follow-up (dependency resolution and build verification)
+- 依存解決を実施
+  - `backend`: `bundle config set --local path vendor/bundle` + `bundle install`
+  - `frontend`: `npm install`
+- 実行確認を実施
+  - `bundle exec rails db:migrate` 成功
+  - `bundle exec rails runner` で Company -> Property -> Store -> Space -> Asset 作成成功
+  - `npm run build` 成功
+- 追加実装
+  - フロントに階層登録導線を拡張（`/properties/:propertyId`, `/stores/:storeId`, `/spaces/:spaceId`）
+  - `rack-cors` を有効化して開発時のクロスオリジンアクセスを許可
+
+### Additional Failures and Fixes
+- `bundle install` 再実行時に `rubygems.org` 到達不可が再発。
+- 修正: 権限昇格で再実行し、`rack-cors` を導入完了。
+- 角括弧ルートファイル作成時に zsh glob 展開で失敗。
+- 修正: ファイルパスをクォートして再生成。
+
+### CI follow-up fixes
+- Frontend CIの依存キャッシュを `yarn.lock` 前提から `npm` 前提へ変更（`frontend/package-lock.json` を使用）。
+- Backend CIで検出された `Gemfile` の trailing empty line を削除。
+- `rubocop` の `db/schema.rb` 生成スタイル差分でCIが落ちる問題に対応し、`Layout/SpaceInsideArrayLiteralBrackets` から `db/schema.rb` を除外。
+- ローカル検証:
+  - `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` -> no offenses
+  - `cd frontend && npm run build` -> success
