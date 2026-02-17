@@ -20,7 +20,14 @@ Rails.application.routes.draw do
       end
 
       resources :inspection_templates, only: %i[index create show]
-      resources :inspection_jobs, only: %i[index create show]
+      resources :inspection_jobs, only: %i[index create show] do
+        member do
+          post :start
+          post :results, action: :save_results
+          post :complete
+        end
+      end
+      resources :issues, only: %i[index create update]
     end
   end
 end

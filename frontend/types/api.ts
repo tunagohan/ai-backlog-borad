@@ -90,3 +90,40 @@ export type InspectionJob = {
   created_at: string
   updated_at: string
 }
+
+export type InspectionResult = {
+  id: number
+  template_item_id: number
+  template_item_name: string | null
+  result_type: 'pass_fail' | 'numeric'
+  result_value: string | null
+  numeric_value: number | null
+  comment: string | null
+}
+
+export type InspectionResultInput = {
+  template_item_id: number
+  result_type: 'pass_fail' | 'numeric'
+  result_value?: string
+  numeric_value?: number
+  comment?: string
+}
+
+export type InspectionJobDetail = InspectionJob & {
+  template: InspectionTemplate
+  results: InspectionResult[]
+}
+
+export type Issue = {
+  id: number
+  company_id: number
+  job_id: number
+  title: string
+  description: string | null
+  severity: 'low' | 'medium' | 'high'
+  status: 'open' | 'in_progress' | 'closed'
+  reported_at: string
+  resolved_at: string | null
+  created_at: string
+  updated_at: string
+}

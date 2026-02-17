@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_18_000008) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_18_000010) do
   create_table "assets", force: :cascade do |t|
     t.integer "space_id", null: false
     t.string "name", null: false
@@ -45,6 +45,20 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_18_000008) do
     t.index ["template_id"], name: "index_inspection_jobs_on_template_id"
   end
 
+  create_table "inspection_results", force: :cascade do |t|
+    t.integer "job_id", null: false
+    t.integer "template_item_id", null: false
+    t.string "result_type", null: false
+    t.string "result_value"
+    t.decimal "numeric_value", precision: 10, scale: 2
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id", "template_item_id"], name: "index_inspection_results_on_job_id_and_template_item_id", unique: true
+    t.index ["job_id"], name: "index_inspection_results_on_job_id"
+    t.index ["template_item_id"], name: "index_inspection_results_on_template_item_id"
+  end
+
   create_table "inspection_template_items", force: :cascade do |t|
     t.integer "section_id", null: false
     t.string "name", null: false
@@ -77,6 +91,22 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_18_000008) do
     t.index ["company_id"], name: "index_inspection_templates_on_company_id"
   end
 
+  create_table "issues", force: :cascade do |t|
+    t.integer "company_id", null: false
+    t.integer "job_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.string "severity", default: "medium", null: false
+    t.string "status", default: "open", null: false
+    t.datetime "reported_at", null: false
+    t.datetime "resolved_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id", "status", "reported_at"], name: "index_issues_on_company_id_and_status_and_reported_at"
+    t.index ["company_id"], name: "index_issues_on_company_id"
+    t.index ["job_id"], name: "index_issues_on_job_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.integer "company_id", null: false
     t.string "name", null: false
@@ -106,9 +136,13 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_18_000008) do
   add_foreign_key "assets", "spaces"
   add_foreign_key "inspection_jobs", "companies"
   add_foreign_key "inspection_jobs", "inspection_templates", column: "template_id"
+  add_foreign_key "inspection_results", "inspection_jobs", column: "job_id"
+  add_foreign_key "inspection_results", "inspection_template_items", column: "template_item_id"
   add_foreign_key "inspection_template_items", "inspection_template_sections", column: "section_id"
   add_foreign_key "inspection_template_sections", "inspection_templates", column: "template_id"
   add_foreign_key "inspection_templates", "companies"
+  add_foreign_key "issues", "companies"
+  add_foreign_key "issues", "inspection_jobs", column: "job_id"
   add_foreign_key "properties", "companies"
   add_foreign_key "spaces", "stores"
   add_foreign_key "stores", "properties"

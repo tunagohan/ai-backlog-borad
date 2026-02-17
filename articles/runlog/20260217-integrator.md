@@ -201,3 +201,47 @@
 - 修正: 対象migration2件の配列表記を修正。
 - `npm ci` 後にローカルNode 22環境で一部依存解決エラーが発生。
 - 修正: `npm install` で依存を再解決し、`npm run build` の成功を確認。
+
+---
+
+## M3 Build Update (Execution and Issue flow)
+
+### Scope
+- M3対象として「点検実施（開始/結果保存/完了）」と「不具合報告（登録/一覧/クローズ）」を追加。
+
+### Backend changes
+- 追加モデル:
+  - `InspectionResult`
+  - `Issue`
+- 追加migration:
+  - `20260218000009_create_inspection_results.rb`
+  - `20260218000010_create_issues.rb`
+- API拡張:
+  - `POST /api/v1/inspection_jobs/:id/start`
+  - `POST /api/v1/inspection_jobs/:id/results`
+  - `POST /api/v1/inspection_jobs/:id/complete`
+  - `GET/POST/PATCH /api/v1/issues`
+  - `GET /api/v1/inspection_jobs/:id` で template + results を返却
+
+### Frontend changes
+- 追加APIモジュール:
+  - `frontend/lib/api/execution.ts`
+  - `frontend/lib/api/issues.ts`
+- 追加画面:
+  - `/tasks/:taskId/execute`（実施開始、結果保存、完了）
+  - `/issues/new`（不具合登録）
+  - `/issues`（不具合一覧、close操作）
+- 導線更新:
+  - `/tasks` から `execute` へ遷移リンクを追加
+  - トップ画面に `issues` への導線を追加
+
+### Verification
+- `cd backend && bundle exec rails db:migrate` 成功
+- `cd backend && bundle exec rails runner ...` で job start -> result save -> complete -> issue create のスモーク成功
+- `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` 成功
+- `cd frontend && npm ci` 実行
+- `cd frontend && npm run build` は Node 22 ローカルで依存欠落再発のため `npm install && npm run build` で成功確認
+
+### Failures and fixes
+- `npm ci` 直後の `npm run build` で `copy-paste` モジュール解決エラーが発生（ローカル Node 22）。
+- 修正: `npm install` を再実行して build成功を確認。
