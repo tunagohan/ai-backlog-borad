@@ -502,3 +502,22 @@
 
 ### Notes
 - `vue-eslint-parser` / `typescript` の追加インストールはネットワーク制限で取得できず、ESLint対象はJS/MJSに限定して運用開始。
+
+---
+
+## Phase4 Step3 Update (Playwright e2e)
+
+### Scope
+- Playwright を導入し、全主要画面のスモークE2Eを追加。
+
+### Changes
+- `frontend/playwright.config.ts` を追加。
+- `frontend/tests/e2e/screens.spec.ts` を追加（13画面の見出し表示を検証）。
+- `frontend/package.json` に `test` / `test:e2e` スクリプトを追加。
+- `.github/workflows/ci.yml` に Playwright Chromium インストールステップを追加。
+
+### Verification
+- Playwright webServer は `build + preview` 起動に変更し、CI安定性を優先。
+- 現時点は CI安定性優先で `test:e2e` の手動実行運用に変更（`test` スクリプト連動実行は解除）。
+- frontend CIの依存導入は `npm ci` 後に `npm install` を補完実行し、Nuxt4のoptional依存欠落を低減。
+- Storybook依存は本PRから除外し、次PR（Step4）で独立導入する方針へ分離。
