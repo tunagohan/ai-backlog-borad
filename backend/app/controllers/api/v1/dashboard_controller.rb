@@ -1,3 +1,5 @@
+require "csv"
+
 module Api
   module V1
     class DashboardController < ApplicationController
@@ -29,7 +31,7 @@ module Api
           }
         end
 
-        render json: {
+        payload = {
           company_id: company.id,
           generated_at: Time.current,
           totals: {
@@ -39,6 +41,31 @@ module Api
           },
           properties: property_summaries
         }
+
+        respond_to do |format|
+          format.json { render json: payload }
+          format.csv { render_csv(payload) }
+        end
+      end
+
+      private
+
+      def render_csv(payload)
+        csv = CSV.generate(headers: true) do |table|
+          table << [ "property_id", "property_name", "latest_inspection_job_id", "latest_inspection_at", "open_issue_count" ]
+
+          payload[:properties].each do |summary|
+            table << [
+              summary[:property_id],
+              summary[:property_name],
+              summary[:latest_inspection_job_id],
+              summary[:latest_inspection_at],
+              summary[:open_issue_count]
+            ]
+          end
+        end
+
+        send_data csv, filename: "dashboard_company_#{payload[:company_id]}.csv", type: "text/csv"
       end
     end
   end

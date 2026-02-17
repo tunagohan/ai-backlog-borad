@@ -305,3 +305,33 @@
 - PR作成後、30秒待機してCIを確認。
 - CIが失敗した場合は修正して再確認ループ。
 - CI通過後にmergeし、次の実行へ進む。
+
+---
+
+## Phase2 Step1 Update (CSV export)
+
+### Scope
+- オーナー向けダッシュボードのCSV出力を追加（任意機能）。
+
+### Backend changes
+- `GET /api/v1/dashboard` に `format.csv` を追加。
+- CSV列:
+  - `property_id`
+  - `property_name`
+  - `latest_inspection_job_id`
+  - `latest_inspection_at`
+  - `open_issue_count`
+
+### Frontend changes
+- `/dashboard` に `CSVダウンロード` リンクを追加。
+- `frontend/lib/api/dashboard.ts` は既存のJSON取得を継続利用。
+
+### Verification
+- `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` 成功
+- `cd frontend && npm ci` 実行
+- `cd frontend && npm install && npm run build` 成功
+
+### Failures and fixes
+- rubocopで配列表記のスタイル違反を検出し修正。
+- npm実行時にローカル環境で依存ディレクトリ不整合が発生。
+- 修正: `frontend/node_modules`/`.nuxt`/`.output` を再生成して build成功を確認。
