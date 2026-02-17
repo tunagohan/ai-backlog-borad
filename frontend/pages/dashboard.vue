@@ -93,12 +93,3 @@ await loadDashboard()
   </main>
 </template>
 
-<style scoped>
-.page { max-width: 980px; margin: 32px auto; padding: 0 16px; font-family: sans-serif; }
-.controls { display: flex; gap: 12px; align-items: end; margin-bottom: 16px; }
-.totals { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 12px; margin-bottom: 16px; }
-.tile { border: 1px solid #ddd; border-radius: 8px; padding: 10px; display: grid; gap: 4px; }
-.table { width: 100%; border-collapse: collapse; }
-th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-.error { color: #b3261e; }
-</style>

@@ -1,0 +1,373 @@
+:root {
+  --bg: #f3f6fb;
+  --bg-strong: #e7edf7;
+  --surface: #ffffff;
+  --surface-soft: #f7f9fc;
+  --border: #d2dceb;
+  --text: #10233f;
+  --muted: #526985;
+  --primary: #0f6cbd;
+  --primary-strong: #0b4f8a;
+  --success: #127c42;
+  --danger: #b42318;
+  --shadow: 0 8px 30px rgba(16, 35, 63, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#__nuxt {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Segoe UI", "Noto Sans JP", sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at 18% 10%, #ffffff 0%, var(--bg) 40%, var(--bg-strong) 100%);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary-strong);
+}
+
+.actions a,
+.controls > a,
+.controls > .router-link-active,
+.controls > .router-link-exact-active {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--primary);
+  min-height: 40px;
+}
+
+.app-shell {
+  min-height: 100vh;
+  position: relative;
+  padding: 20px;
+}
+
+.app-shell__bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(15, 108, 189, 0.08), rgba(255, 255, 255, 0)),
+    radial-gradient(circle at 80% 20%, rgba(18, 124, 66, 0.08), rgba(255, 255, 255, 0) 45%);
+}
+
+.app-header {
+  position: sticky;
+  top: 16px;
+  z-index: 20;
+  max-width: 1200px;
+  margin: 0 auto 18px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 14px 18px;
+}
+
+.app-header__brand {
+  margin-bottom: 12px;
+}
+
+.app-header__brand h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: 0.01em;
+}
+
+.app-header__eyebrow {
+  margin: 0 0 2px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.app-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.app-nav__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  font-size: 0.88rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  color: var(--muted);
+}
+
+.app-nav__item.is-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.app-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 16px;
+  animation: fade-in 0.3s ease-out;
+}
+
+.page h1 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+}
+
+.page h2 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.page > p {
+  color: var(--muted);
+}
+
+.controls,
+.form {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.controls {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: end;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+textarea {
+  min-height: 84px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid rgba(15, 108, 189, 0.25);
+  border-color: var(--primary);
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--primary), #3b8fd3);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(0.98);
+}
+
+button:disabled {
+  background: #a0b5ce;
+  cursor: not-allowed;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+}
+
+.table thead {
+  background: #eaf1fb;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 0.92rem;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--surface-soft);
+  margin-bottom: 14px;
+}
+
+.item {
+  display: grid;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item > p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.item label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px 0 14px;
+}
+
+ul {
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+li {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-soft);
+  padding: 10px 12px;
+}
+
+.totals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tile {
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg, #fff, #f3f7fd);
+  border-radius: 12px;
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.tile strong {
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tile span {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.error {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.success {
+  color: var(--success);
+  font-weight: 600;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    padding: 12px;
+  }
+
+  .page {
+    padding: 16px;
+  }
+
+  .app-header {
+    top: 8px;
+    padding: 12px;
+  }
+
+  .app-nav {
+    gap: 6px;
+  }
+
+  .app-nav__item {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+}

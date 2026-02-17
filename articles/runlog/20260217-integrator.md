@@ -444,3 +444,23 @@
 - `/dashboard` のタイルに「平均解消時間 (h)」を追加。
 - 一覧テーブルに「平均解消時間 (h)」列を追加。
 - `frontend/types/api.ts` に新規フィールドを追加。
+
+---
+
+## Phase3 Step2 Update (Frontend redesign)
+
+### Scope
+- 画面全体の簡易スタイルを廃止し、企業向けの統一デザインに再構成。
+
+### Decisions
+- `@nuxt/ui` 導入を試行したが、実行環境のネットワーク制限（`registry.npmjs.org` 到達不可）で依存追加が不可。
+- フォールバックとして、既存Nuxt構成のまま共通デザインシステムを `assets/css/main.css` に実装して全ページへ適用。
+
+### Frontend changes
+- `app.vue` に共通アプリシェル（sticky header / nav / active state）を追加。
+- `nuxt.config.ts` で共通CSS読込を追加。
+- 各ページの `scoped style` を撤去し、フォーム/カード/テーブル/通知色を統一。
+- トップページの導線をカード化し、主要ユースケースを再編成。
+
+### Verification
+- `cd frontend && npm run build` 成功

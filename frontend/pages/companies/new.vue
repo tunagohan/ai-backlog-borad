@@ -50,9 +50,3 @@ async function submit() {
   </main>
 </template>
 
-<style scoped>
-.page { max-width: 760px; margin: 40px auto; font-family: sans-serif; padding: 0 16px; }
-.form { display: grid; gap: 12px; max-width: 320px; }
-.error { color: #b3261e; }
-.success { color: #1f7a39; }
-</style>

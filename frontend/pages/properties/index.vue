@@ -85,8 +85,3 @@ await load()
   </main>
 </template>
 
-<style scoped>
-.page { max-width: 760px; margin: 40px auto; font-family: sans-serif; padding: 0 16px; }
-.form { display: grid; gap: 12px; max-width: 360px; margin-bottom: 16px; }
-.error { color: #b3261e; }
-</style>

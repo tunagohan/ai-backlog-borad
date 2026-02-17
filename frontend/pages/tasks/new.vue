@@ -170,10 +170,3 @@ await loadTemplates()
   </main>
 </template>
 
-<style scoped>
-.page { max-width: 860px; margin: 40px auto; font-family: sans-serif; padding: 0 16px; display: grid; gap: 20px; }
-.card { border: 1px solid #ddd; border-radius: 10px; padding: 16px; }
-.form { display: grid; gap: 10px; max-width: 420px; }
-.error { color: #b3261e; }
-.success { color: #1f7a39; }
-</style>
