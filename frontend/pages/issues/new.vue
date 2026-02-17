@@ -55,11 +55,19 @@ async function submit() {
     <h1>不具合報告</h1>
 
     <form class="form" @submit.prevent="submit">
-      <label>Company ID<input v-model.number="form.companyId" type="number" min="1" required /></label>
+      <label
+        >Company ID<input v-model.number="form.companyId" type="number" min="1" required
+      /></label>
       <label>Job ID<input v-model.number="form.jobId" type="number" min="1" required /></label>
       <label>タイトル<input v-model="form.title" type="text" required /></label>
       <label>詳細<textarea v-model="form.description" rows="4" /></label>
-      <label>画像URL（改行区切り）<textarea v-model="form.imageUrlsText" rows="3" placeholder="https://example.com/image1.jpg" /></label>
+      <label
+        >画像URL（改行区切り）<textarea
+          v-model="form.imageUrlsText"
+          rows="3"
+          placeholder="https://example.com/image1.jpg"
+        />
+      </label>
       <label>
         緊急度
         <select v-model="form.severity">
@@ -77,4 +85,3 @@ async function submit() {
     <p><NuxtLink to="/issues">不具合一覧へ</NuxtLink></p>
   </main>
 </template>
-

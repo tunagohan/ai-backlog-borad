@@ -59,7 +59,9 @@ await load()
         店舗名
         <input v-model="storeName" type="text" required />
       </label>
-      <button type="submit" :disabled="submitting">{{ submitting ? '登録中...' : '店舗を登録' }}</button>
+      <button type="submit" :disabled="submitting">
+        {{ submitting ? '登録中...' : '店舗を登録' }}
+      </button>
     </form>
 
     <p v-if="loading">読み込み中...</p>
@@ -74,4 +76,3 @@ await load()
     <p><NuxtLink to="/">トップへ戻る</NuxtLink></p>
   </main>
 </template>
-

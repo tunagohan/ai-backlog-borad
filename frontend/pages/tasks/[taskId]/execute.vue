@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ApiError } from '~/lib/api/client'
-import { completeInspectionJob, getInspectionJob, saveInspectionResults, startInspectionJob } from '~/lib/api/execution'
+import {
+  completeInspectionJob,
+  getInspectionJob,
+  saveInspectionResults,
+  startInspectionJob
+} from '~/lib/api/execution'
 import type { InspectionJobDetail, InspectionResultInput } from '~/types/api'
 
 const route = useRoute()
@@ -28,7 +33,8 @@ async function loadJob() {
         if (item.result_type === 'pass_fail') {
           passFailValues[item.id] = existing?.result_value || 'pass'
         } else {
-          numericValues[item.id] = existing?.numeric_value != null ? String(existing.numeric_value) : ''
+          numericValues[item.id] =
+            existing?.numeric_value != null ? String(existing.numeric_value) : ''
         }
         comments[item.id] = existing?.comment || ''
       })
@@ -162,7 +168,9 @@ await loadJob()
       <div class="actions">
         <button :disabled="saving" @click="saveResultsOnly">保存</button>
         <button :disabled="saving" @click="completeJob">完了</button>
-        <NuxtLink :to="`/issues/new?jobId=${job.id}&companyId=${job.company_id}`">不具合を報告</NuxtLink>
+        <NuxtLink :to="`/issues/new?jobId=${job.id}&companyId=${job.company_id}`"
+          >不具合を報告</NuxtLink
+        >
       </div>
     </template>
 
@@ -171,4 +179,3 @@ await loadJob()
     <p><NuxtLink to="/tasks">ジョブ一覧へ戻る</NuxtLink></p>
   </main>
 </template>
-

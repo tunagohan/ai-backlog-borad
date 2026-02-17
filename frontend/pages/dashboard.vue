@@ -9,7 +9,9 @@ const errorMessage = ref('')
 const dashboard = ref<DashboardSummary | null>(null)
 const config = useRuntimeConfig()
 
-const csvDownloadUrl = computed(() => `${config.public.apiBaseUrl}/dashboard.csv?company_id=${companyId.value}`)
+const csvDownloadUrl = computed(
+  () => `${config.public.apiBaseUrl}/dashboard.csv?company_id=${companyId.value}`
+)
 
 async function loadDashboard() {
   loading.value = true
@@ -92,4 +94,3 @@ await loadDashboard()
     <p><NuxtLink to="/tasks">ジョブ一覧へ</NuxtLink></p>
   </main>
 </template>
-

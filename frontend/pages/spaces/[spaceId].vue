@@ -71,7 +71,9 @@ await load()
       <label>シリアル<input v-model="form.serialNumber" type="text" /></label>
       <label>設置日<input v-model="form.installedOn" type="date" /></label>
       <label>状態<input v-model="form.status" type="text" placeholder="active" /></label>
-      <button type="submit" :disabled="submitting">{{ submitting ? '登録中...' : '資産を登録' }}</button>
+      <button type="submit" :disabled="submitting">
+        {{ submitting ? '登録中...' : '資産を登録' }}
+      </button>
     </form>
 
     <p v-if="loading">読み込み中...</p>
@@ -88,4 +90,3 @@ await load()
     <p><NuxtLink to="/">トップへ戻る</NuxtLink></p>
   </main>
 </template>
-

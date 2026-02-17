@@ -16,7 +16,8 @@ async function loadJobs() {
     jobs.value = await listInspectionJobs(companyId.value)
   } catch (error) {
     if (error instanceof ApiError) {
-      errorMessage.value = error.payload?.message || `ジョブ取得に失敗しました (status: ${error.status})`
+      errorMessage.value =
+        error.payload?.message || `ジョブ取得に失敗しました (status: ${error.status})`
     } else {
       errorMessage.value = 'ジョブ取得に失敗しました'
     }
@@ -70,4 +71,3 @@ await loadJobs()
     <p><NuxtLink to="/issues">不具合一覧へ</NuxtLink></p>
   </main>
 </template>
-
