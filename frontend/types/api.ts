@@ -48,3 +48,45 @@ export type ApiErrorPayload = {
   message?: string
   details?: Record<string, string[]>
 }
+
+export type InspectionTemplateItem = {
+  id: number
+  name: string
+  result_type: 'pass_fail' | 'numeric'
+  unit: string | null
+  required: boolean
+  sort_order: number
+}
+
+export type InspectionTemplateSection = {
+  id: number
+  name: string
+  sort_order: number
+  items: InspectionTemplateItem[]
+}
+
+export type InspectionTemplate = {
+  id: number
+  company_id: number
+  name: string
+  version: number
+  is_active: boolean
+  sections: InspectionTemplateSection[]
+  created_at: string
+  updated_at: string
+}
+
+export type InspectionJob = {
+  id: number
+  company_id: number
+  template_id: number
+  template_name: string | null
+  target_type: 'property' | 'store' | 'space'
+  target_id: number
+  status: 'scheduled' | 'in_progress' | 'completed'
+  scheduled_for: string
+  started_at: string | null
+  completed_at: string | null
+  created_at: string
+  updated_at: string
+}
