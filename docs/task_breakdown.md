@@ -1,14 +1,62 @@
 # Task Breakdown
 
-## MVP milestones
-- M0: repo bootstrap & CI
-- M1: backend minimal API + frontend minimal UI
-- M2: auth + core workflow
-- M3: polish + observability
+## Planning Assumptions (DISCOVERY)
+- MVP導線: 会社登録 -> 物件/店舗登録 -> 点検実施 -> 不具合報告 -> オーナー確認
+- 認証: ダミーユーザー固定（本認証はPhase 2）
+- 非機能: ヘルスチェック/基本ログはMVP必須
 
-## Tickets (example format)
-- [BE] ...
-- [FE] ...
-- [Design] ...
-- [PO] ...
-- [Research] ...
+## MVP Implementation Order
+
+### M0: Scope Freeze / UX Definition
+- [PO] MVPスコープ確定とAC確定
+  - AC: MVP対象外（画像添付、PDF、詳細階層）が明文化されている
+  - テスト観点: スコープ逸脱のチケットが含まれていないこと
+- [Design] 主要4画面ワイヤー確定（会社登録、点検一覧、点検入力、不具合報告）
+  - AC: empty/loading/error/success状態が各画面で定義済み
+  - テスト観点: 状態遷移が要件と矛盾しないこと
+- [Research] 無料枠インフラ候補の比較（Rails/Nuxt/API DB/ログ）
+  - AC: 採用案1つ＋代替案1つ、コスト上限を提示
+  - テスト観点: 無料枠超過リスクが定量で示されている
+
+### M1: Foundation (API/DB/UI Skeleton)
+- [BE] 最小データモデル実装（Company, Property, Store, InspectionTask, InspectionReport, Issue）
+  - AC: CRUDのうちMVP導線に必要なCreate/List/Detailが利用可能
+  - テスト観点: バリデーション、関連整合性、400/404ハンドリング
+- [FE] ルーティングとAPIクライアント土台実装
+  - AC: 主要4画面へ遷移でき、APIエラー表示が統一される
+  - テスト観点: 画面遷移、通信失敗時UI、再試行導線
+- [Design] コンポーネント最小ルール（フォーム/カード/ステータス表示）定義
+  - AC: FEで再利用できるUI仕様が文書化済み
+  - テスト観点: 画面間でUIコンポーネントが一貫する
+
+### M2: Core Workflow (Inspection -> Issue)
+- [BE] 点検テンプレート3入力型（良否/数値/テキスト）と報告保存API
+  - AC: 点検結果が履歴として参照可能
+  - テスト観点: 入力型ごとの保存/取得、必須項目、異常値
+- [BE] 不具合報告API（テキスト、優先度、発生日）
+  - AC: 点検から不具合報告への紐付けが可能
+  - テスト観点: 紐付け整合性、優先度列挙値チェック
+- [FE] 点検入力UIと不具合報告UI実装
+  - AC: 1回の業務実施がUI上で完結する
+  - テスト観点: 入力検証、送信中状態、成功/失敗フィードバック
+- [PO] 業務完了の定義と運用ルール（誰がいつ完了扱いにするか）確定
+  - AC: 完了条件が仕様に記述される
+  - テスト観点: 完了/未完了の判定に曖昧さがない
+
+### M3: Owner Visibility / Ops Minimum
+- [FE] オーナー向け一覧画面（直近点検、不具合一覧、CSV出力）
+  - AC: 物件単位で点検状況と不具合状況を一覧確認できる
+  - テスト観点: フィルタ、ソート、CSV出力内容整合
+- [BE] ヘルスチェックと基本監査ログ
+  - AC: /health で稼働確認、主要操作ログが追跡可能
+  - テスト観点: 正常/異常時レスポンス、ログ必須項目
+- [Research] MVP計測指標の集計方法策定（週次）
+  - AC: 利用率/報告率の計測定義が決まる
+  - テスト観点: 指標式が実データで再現可能
+
+## Role Allocation Summary
+- PO: スコープ境界、AC最終化、運用定義
+- Design: 画面仕様、状態設計、再利用UI指針
+- BE: データモデル、業務API、監視/監査基盤
+- FE: 操作導線、API連携、エラーハンドリング
+- Research: 無料枠調査、運用コスト評価、指標定義
