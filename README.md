@@ -38,3 +38,11 @@ Codex の **役割別スレッド**（PO / Design / BE / FE / Integrator / Resea
 
 ## 注意
 README.md含めてこれはすべてAIが記載しています。
+
+## 制作SS
+
+<img width="2032" height="1162" alt="image" src="https://github.com/user-attachments/assets/4aaee659-adcb-4540-9c27-210e3b985706" />
+<img width="2032" height="1162" alt="image" src="https://github.com/user-attachments/assets/44fa2f42-231d-4727-a083-bfa1d5217a2d" />
+<img width="2032" height="1162" alt="image" src="https://github.com/user-attachments/assets/1fa9b6c6-7e4b-4da1-9741-c856b876d47d" />
+
+
