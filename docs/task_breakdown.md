@@ -6,6 +6,9 @@
 - M2: completed
 - M3: completed
 - M4: completed
+- Phase2 Step1 (CSV export): completed
+- Phase2 Step2 (Issue image attachments): completed
+- Phase2 Step3 (In-app notifications): completed
 - Current phase: BUILD (MVP implementation completed)
 
 ## Planning Assumptions (DISCOVERY)
@@ -51,6 +54,38 @@
 - [Research] 週次計測運用（完了率/報告率/リードタイム）を定義
 - AC: オーナーが物件単位で状況を俯瞰でき、運用ログで追跡可能
 - テスト観点: フィルタ整合、監査ログ必須項目、ヘルスチェック応答
+
+## Post-MVP Extension Order (Phase2)
+
+### Step1: Owner CSV Export
+- [BE] `GET /api/v1/dashboard.csv` 出力を実装
+- [FE] ダッシュボードからCSVダウンロード導線を追加
+- [PO] CSV列定義を受け入れ（物件別集計）
+- AC: オーナーが物件集計をCSVで取得できる
+- テスト観点: CSVヘッダ整合、件数一致、文字化けなし
+
+### Step2: Issue Image Attachments
+- [BE] issueに `image_urls` を追加し、作成/更新/一覧APIを拡張
+- [FE] 不具合入力で画像URLの複数登録UIを実装
+- [Design] 画像有無が一覧で判別できる表示を定義
+- AC: 画像URL付き不具合を登録し一覧で確認できる
+- テスト観点: 配列保存整合、空配列/不正URL入力時挙動
+
+### Step3: In-app Notifications
+- [BE] notificationsモデル/API（一覧/既読）を実装し、issue更新イベント連携
+- [FE] 通知一覧画面と既読操作を実装
+- [Research] 通知利用状況の観測項目（未読件数/既読化率）を定義
+- AC: issue作成/更新に連動して通知が生成され、画面で既読化できる
+- テスト観点: 通知生成条件、未読フィルタ、既読更新整合
+
+### Step4: Pending Candidates (Phase3 planning input)
+- [PO] メール/外部通知の導入要否を決定
+- [Design] PDF帳票UI要件の必要性を評価
+- [BE] 本認証/RBAC導入の分割案を提示
+- [FE] 認証導線変更時の画面影響を見積
+- [Research] 通知/帳票の利用実績を評価し優先度を提案
+- AC: 次フェーズ着手可否を判断できる優先順位表がある
+- テスト観点: なし（計画タスク）
 
 ## Role Allocation Summary
 - PO: スコープ固定、AC承認準備、運用ルール確定
