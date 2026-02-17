@@ -46,3 +46,50 @@
 ## Failures and Fixes
 - `rg --files articles/runlog` は `.gitkeep` のみで実質対象ファイルなしのため exit code 1 となった。
 - 修正: 既存runlogが未作成であることを確認したうえで、新規 `20260217-integrator.md` を追加して解消。
+
+---
+
+## Integration Update (role branches merged in DISCOVERY)
+
+### Input Prompt (summary)
+- 各役割（PO/Design/BE/FE/Research）の push 済みブランチ差分を確認し、DISCOVERYを統合する。
+- `docs/decision_log.md` と `docs/task_breakdown.md` を統合更新し、`docs/approval.md` は `pending` 維持。
+- 最後にDISCOVERY統合PRを作成する。
+
+### Who decided what
+- PO案の採用: MVPは「会社登録 -> 階層登録 -> 点検実施 -> 不具合報告 -> オーナー確認」を成立条件とする。
+- Design案の採用: 主要導線（セットアップ/実施/確認）と empty/loading/error 状態定義を統合前提にする。
+- BE案の採用: 会社境界/RBAC、テンプレートversion固定、ジョブ状態遷移をAPI基準として扱う。
+- FE案の採用: ルート構成、APIクライアント集約、エラー復帰（入力保持/再試行）をMVP標準にする。
+- Research案の採用: 一次ICPを複数物件オーナー中心で検証し、価格/チャネル仮説は実験で継続検証する。
+
+### Remaining Issues
+- 認証をどこまでMVPに含めるか（固定ダミーのままか）
+- 不具合画像添付とCSV出力をMVP必須にするか
+- 通知チャネル（メール/外部連携）をMVP対象に入れるか
+- 監視/監査/計測の運用責任境界をどこで切るか
+
+### Commands Executed
+- `git branch --all`
+- `git diff --name-status main..codex/02design-discovery -- docs`
+- `git diff --name-status main..codex/03be-discovery -- docs`
+- `git diff --name-status main..codex/04fe-discovery -- docs`
+- `git diff --name-status main..codex/06research-discovery -- docs`
+- `git show codex/02design-discovery:docs/design.md`
+- `git show codex/02design-discovery:docs/po.md`
+- `git show codex/03be-discovery:docs/api.md`
+- `git show codex/04fe-discovery:docs/frontend.md`
+- `git show codex/06research-discovery:docs/experiments.md`
+- `git show codex/06research-discovery:docs/growth.md`
+- `git show codex/02design-discovery:docs/decision_log.md`
+- `git show codex/03be-discovery:docs/decision_log.md`
+- `git show codex/04fe-discovery:docs/decision_log.md`
+- `git show codex/06research-discovery:docs/decision_log.md`
+- `git checkout codex/02design-discovery -- docs/po.md docs/design.md`
+- `git checkout codex/03be-discovery -- docs/api.md`
+- `git checkout codex/04fe-discovery -- docs/frontend.md`
+- `git checkout codex/06research-discovery -- docs/experiments.md docs/growth.md`
+
+### Failures and Fixes
+- `git checkout ...` 初回実行で sandbox 制約により `.git/worktrees/.../index.lock` 作成失敗。
+- 修正: 権限昇格で同コマンドを再実行し、docs取り込みを完了。
