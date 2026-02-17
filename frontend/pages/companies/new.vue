@@ -49,4 +49,3 @@ async function submit() {
     <p><NuxtLink to="/">トップへ戻る</NuxtLink></p>
   </main>
 </template>
-

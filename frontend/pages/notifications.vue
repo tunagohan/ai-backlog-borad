@@ -80,4 +80,3 @@ await load()
     <p v-else>通知はありません。</p>
   </main>
 </template>
-

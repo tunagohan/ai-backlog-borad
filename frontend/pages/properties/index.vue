@@ -67,7 +67,9 @@ await load()
         住所
         <input v-model="propertyAddress" type="text" />
       </label>
-      <button type="submit" :disabled="submitting">{{ submitting ? '登録中...' : '物件を登録' }}</button>
+      <button type="submit" :disabled="submitting">
+        {{ submitting ? '登録中...' : '物件を登録' }}
+      </button>
     </form>
 
     <p v-if="loading">読み込み中...</p>
@@ -84,4 +86,3 @@ await load()
     <p><NuxtLink to="/companies/new">会社登録へ</NuxtLink></p>
   </main>
 </template>
-

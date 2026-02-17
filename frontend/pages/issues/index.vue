@@ -93,4 +93,3 @@ await load()
     <p><NuxtLink to="/issues/new">不具合報告へ</NuxtLink></p>
   </main>
 </template>
-

@@ -35,7 +35,8 @@ async function loadTemplates() {
     templates.value = await listInspectionTemplates(companyId.value)
   } catch (error) {
     if (error instanceof ApiError) {
-      errorMessage.value = error.payload?.message || `テンプレート取得に失敗しました (status: ${error.status})`
+      errorMessage.value =
+        error.payload?.message || `テンプレート取得に失敗しました (status: ${error.status})`
     } else {
       errorMessage.value = 'テンプレート取得に失敗しました'
     }
@@ -72,7 +73,8 @@ async function submitTemplate() {
     await loadTemplates()
   } catch (error) {
     if (error instanceof ApiError) {
-      errorMessage.value = error.payload?.message || `テンプレート作成に失敗しました (status: ${error.status})`
+      errorMessage.value =
+        error.payload?.message || `テンプレート作成に失敗しました (status: ${error.status})`
     } else {
       errorMessage.value = 'テンプレート作成に失敗しました'
     }
@@ -101,7 +103,8 @@ async function submitJob() {
     jobForm.scheduledFor = ''
   } catch (error) {
     if (error instanceof ApiError) {
-      errorMessage.value = error.payload?.message || `ジョブ作成に失敗しました (status: ${error.status})`
+      errorMessage.value =
+        error.payload?.message || `ジョブ作成に失敗しました (status: ${error.status})`
     } else {
       errorMessage.value = 'ジョブ作成に失敗しました'
     }
@@ -131,7 +134,9 @@ await loadTemplates()
             <option value="numeric">数値</option>
           </select>
         </label>
-        <button type="submit" :disabled="templateSubmitting">{{ templateSubmitting ? '作成中...' : 'テンプレートを作成' }}</button>
+        <button type="submit" :disabled="templateSubmitting">
+          {{ templateSubmitting ? '作成中...' : 'テンプレートを作成' }}
+        </button>
       </form>
       <p v-if="templateMessage" class="success">{{ templateMessage }}</p>
     </section>
@@ -158,8 +163,12 @@ await loadTemplates()
           </select>
         </label>
         <label>対象ID<input v-model="jobForm.targetId" type="number" min="1" required /></label>
-        <label>実施予定日<input v-model="jobForm.scheduledFor" type="datetime-local" required /></label>
-        <button type="submit" :disabled="jobSubmitting">{{ jobSubmitting ? '作成中...' : 'ジョブを作成' }}</button>
+        <label
+          >実施予定日<input v-model="jobForm.scheduledFor" type="datetime-local" required
+        /></label>
+        <button type="submit" :disabled="jobSubmitting">
+          {{ jobSubmitting ? '作成中...' : 'ジョブを作成' }}
+        </button>
       </form>
       <p v-if="jobMessage" class="success">{{ jobMessage }}</p>
       <p><NuxtLink to="/tasks">ジョブ一覧へ</NuxtLink></p>
@@ -169,4 +178,3 @@ await loadTemplates()
     <p><NuxtLink to="/">トップへ戻る</NuxtLink></p>
   </main>
 </template>
-

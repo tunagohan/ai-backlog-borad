@@ -480,3 +480,25 @@
 ### Notes
 - ローカル実行環境は Node `22.1.0` のため Nuxt4要件（`>=22.12.0`）を満たさず、ローカルbuild検証は不成立。
 - 最終判定は GitHub Actions（Node 22.12.0）で実施。
+
+---
+
+## Phase4 Step2 Update (Prettier / ESLint / Stylelint setup)
+
+### Scope
+- frontend に整形・静的解析の標準実行コマンドと設定を追加。
+
+### Changes
+- `frontend/package.json`
+  - `lint` / `lint:eslint` / `lint:stylelint` / `format` / `format:check` を追加。
+- `frontend/.prettierrc.json` / `frontend/.prettierignore` を追加。
+- `frontend/eslint.config.mjs` を追加（flat config, JS/MJS対象）。
+- `frontend/stylelint.config.cjs` を追加（standard + recommended-vue）。
+- Prettier適用に伴い frontend 各画面とAPIモジュールの整形差分を反映。
+
+### Verification
+- `cd frontend && npm run lint` 成功
+- `cd frontend && npm run format:check` 成功
+
+### Notes
+- `vue-eslint-parser` / `typescript` の追加インストールはネットワーク制限で取得できず、ESLint対象はJS/MJSに限定して運用開始。

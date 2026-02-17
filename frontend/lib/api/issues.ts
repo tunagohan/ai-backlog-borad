@@ -30,7 +30,10 @@ export function createIssue(input: {
   })
 }
 
-export function updateIssue(issueId: number, input: Partial<Pick<Issue, 'status' | 'severity' | 'title' | 'description' | 'image_urls'>>) {
+export function updateIssue(
+  issueId: number,
+  input: Partial<Pick<Issue, 'status' | 'severity' | 'title' | 'description' | 'image_urls'>>
+) {
   return apiFetch<Issue>(`/issues/${issueId}`, {
     method: 'PATCH',
     body: { issue: input }

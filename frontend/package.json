@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "lint": "npm run lint:eslint && npm run lint:stylelint",
+    "lint:eslint": "eslint \"**/*.{js,mjs}\"",
+    "lint:stylelint": "stylelint \"**/*.{css,vue}\" --allow-empty-input",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@nuxt/ui": "^4.4.0",

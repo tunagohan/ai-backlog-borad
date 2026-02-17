@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
+@import 'tailwindcss';
+@import '@nuxt/ui';
 
 :root {
   --bg: #f3f6fb;
@@ -25,14 +25,9 @@ body,
 #__nuxt {
   margin: 0;
   min-height: 100%;
-  font-family: "Segoe UI", "Noto Sans JP", sans-serif;
+  font-family: 'Segoe UI', 'Noto Sans JP', sans-serif;
   color: var(--text);
-  background: radial-gradient(
-    circle at 18% 10%,
-    #ffffff 0%,
-    var(--bg) 40%,
-    var(--bg-strong) 100%
-  );
+  background: radial-gradient(circle at 18% 10%, #ffffff 0%, var(--bg) 40%, var(--bg-strong) 100%);
 }
 
 a {
@@ -69,16 +64,9 @@ a:hover {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-      120deg,
-      rgba(15, 108, 189, 0.08),
-      rgba(255, 255, 255, 0)
-    ),
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(18, 124, 66, 0.08),
-      rgba(255, 255, 255, 0) 45%
-    );
+  background:
+    linear-gradient(120deg, rgba(15, 108, 189, 0.08), rgba(255, 255, 255, 0)),
+    radial-gradient(circle at 80% 20%, rgba(18, 124, 66, 0.08), rgba(255, 255, 255, 0) 45%);
 }
 
 .app-header {
