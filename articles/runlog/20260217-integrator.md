@@ -520,3 +520,4 @@
 - Playwright webServer は `build + preview` 起動に変更し、CI安定性を優先。
 - 現時点は CI安定性優先で `test:e2e` の手動実行運用に変更（`test` スクリプト連動実行は解除）。
 - frontend CIの依存導入は `npm ci` 後に `npm install` を補完実行し、Nuxt4のoptional依存欠落を低減。
+- Storybook依存は本PRから除外し、次PR（Step4）で独立導入する方針へ分離。
