@@ -50,6 +50,7 @@ await loadJobs()
           <th>Target</th>
           <th>Status</th>
           <th>Scheduled</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -59,12 +60,14 @@ await loadJobs()
           <td>{{ job.target_type }} #{{ job.target_id }}</td>
           <td>{{ job.status }}</td>
           <td>{{ job.scheduled_for }}</td>
+          <td><NuxtLink :to="`/tasks/${job.id}/execute`">実施</NuxtLink></td>
         </tr>
       </tbody>
     </table>
     <p v-else>ジョブはありません。</p>
 
     <p><NuxtLink to="/tasks/new">ジョブ作成へ</NuxtLink></p>
+    <p><NuxtLink to="/issues">不具合一覧へ</NuxtLink></p>
   </main>
 </template>
 
