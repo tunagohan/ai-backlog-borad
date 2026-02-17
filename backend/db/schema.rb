@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_18_000011) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_18_000012) do
   create_table "assets", force: :cascade do |t|
     t.integer "space_id", null: false
     t.string "name", null: false
@@ -116,6 +116,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_18_000011) do
     t.datetime "resolved_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "image_urls", default: "[]", null: false
     t.index ["company_id", "status", "reported_at"], name: "index_issues_on_company_id_and_status_and_reported_at"
     t.index ["company_id"], name: "index_issues_on_company_id"
     t.index ["job_id"], name: "index_issues_on_job_id"

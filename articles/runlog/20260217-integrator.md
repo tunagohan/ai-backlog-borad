@@ -335,3 +335,33 @@
 - rubocopで配列表記のスタイル違反を検出し修正。
 - npm実行時にローカル環境で依存ディレクトリ不整合が発生。
 - 修正: `frontend/node_modules`/`.nuxt`/`.output` を再生成して build成功を確認。
+
+---
+
+## Phase2 Step2 Update (Issue image attachments)
+
+### Scope
+- 不具合報告に画像URL配列（`image_urls`）を追加し、登録/表示を可能にする。
+
+### Backend changes
+- migration:
+  - `20260218000012_add_image_urls_to_issues.rb`
+- model:
+  - `Issue` に `image_urls_array` accessor を追加（JSON text変換）
+- API:
+  - `POST/PATCH /api/v1/issues` で `image_urls` を受け付け
+  - `GET /api/v1/issues` のレスポンスに `image_urls` を追加
+
+### Frontend changes
+- `frontend/pages/issues/new.vue`
+  - 画像URL（改行区切り）入力を追加
+- `frontend/pages/issues/index.vue`
+  - 画像数カラムを追加
+- `frontend/lib/api/issues.ts` / `frontend/types/api.ts`
+  - `image_urls` 型と送受信を追加
+
+### Verification
+- `cd backend && bundle exec rails db:migrate` 成功
+- `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` 成功
+- `cd frontend && npm ci` 実行
+- `cd frontend && npm install && npm run build` 成功
