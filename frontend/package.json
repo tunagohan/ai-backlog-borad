@@ -26,6 +26,8 @@
     "stylelint": "^17.3.0",
     "stylelint-config-recommended-vue": "^1.6.1",
     "stylelint-config-standard": "^40.0.0",
-    "typescript-eslint": "^8.56.0"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.0",
+    "vue-eslint-parser": "^10.4.0"
   }
 }
