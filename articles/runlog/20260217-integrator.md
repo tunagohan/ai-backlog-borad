@@ -287,3 +287,21 @@
 - `npm ci` 実行時に `ENOTEMPTY` が発生。
 - `npm install && npm run build` 実行中に npm内部エラー（Exit handler never called）が発生。
 - 修正: `frontend/node_modules`/`.nuxt`/`.output` を再作成して再実行し、build成功を確認。
+
+---
+
+## Finalization Update (post M4)
+
+### Objective
+- M0-M4の実装完了をdocsへ反映し、MVP完了判定を明文化する。
+
+### Updated docs
+- `docs/task_breakdown.md`
+  - `Execution Status (2026-02-18)` を追加し、M0-M4 completed を明記。
+- `docs/decision_log.md`
+  - `Build Decisions (2026-02-18)` を追加し、Q1-Q10の採択結果とMVP導線成立を記録。
+
+### Verification policy
+- PR作成後、30秒待機してCIを確認。
+- CIが失敗した場合は修正して再確認ループ。
+- CI通過後にmergeし、次の実行へ進む。

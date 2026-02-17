@@ -1,5 +1,13 @@
 # Task Breakdown
 
+## Execution Status (2026-02-18)
+- M0: completed
+- M1: completed
+- M2: completed
+- M3: completed
+- M4: completed
+- Current phase: BUILD (MVP implementation completed)
+
 ## Planning Assumptions (DISCOVERY)
 - MVP導線: 会社登録 -> 階層登録（物件/店舗/スペース/資産） -> テンプレート作成 -> 業務作成/実施 -> 不具合報告 -> オーナー確認
 - 認証: ダミーユーザー固定（ownerロール）、`current_user` 抽象は先に入れる
