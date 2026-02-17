@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       resources :spaces, only: [] do
         resources :assets, only: %i[index create]
       end
+
+      resources :inspection_templates, only: %i[index create show]
+      resources :inspection_jobs, only: %i[index create show]
     end
   end
 end

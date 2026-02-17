@@ -155,3 +155,49 @@
 - ローカル検証:
   - `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` -> no offenses
   - `cd frontend && npm run build` -> success
+
+---
+
+## M2 Build Update (Template and Job)
+
+### Scope
+- M2対象として「点検テンプレート作成」「点検ジョブ作成/一覧」の最小導線を実装。
+
+### Backend changes
+- 追加モデル:
+  - `InspectionTemplate`
+  - `InspectionTemplateSection`
+  - `InspectionTemplateItem`
+  - `InspectionJob`
+- 追加API:
+  - `GET/POST /api/v1/inspection_templates`
+  - `GET /api/v1/inspection_templates/:id`
+  - `GET/POST /api/v1/inspection_jobs`
+  - `GET /api/v1/inspection_jobs/:id`
+- 追加migration:
+  - `20260218000005_create_inspection_templates.rb`
+  - `20260218000006_create_inspection_template_sections.rb`
+  - `20260218000007_create_inspection_template_items.rb`
+  - `20260218000008_create_inspection_jobs.rb`
+
+### Frontend changes
+- 追加APIモジュール:
+  - `frontend/lib/api/templates.ts`
+  - `frontend/lib/api/jobs.ts`
+- 追加画面:
+  - `/tasks/new`（テンプレート作成 + ジョブ作成）
+  - `/tasks`（ジョブ一覧）
+- `frontend/pages/index.vue` にM2導線リンクを追加。
+
+### Verification
+- `cd backend && bundle exec rails db:migrate` 成功
+- `cd backend && bundle exec rails runner ...` でテンプレート/ジョブ作成成功
+- `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` 成功
+- `cd frontend && npm ci` 実行
+- `cd frontend && npm run build` 実行
+
+### Failures and fixes
+- rubocopでmigrationの配列表記（space inside brackets）違反を検出。
+- 修正: 対象migration2件の配列表記を修正。
+- `npm ci` 後にローカルNode 22環境で一部依存解決エラーが発生。
+- 修正: `npm install` で依存を再解決し、`npm run build` の成功を確認。

@@ -13,6 +13,8 @@ function goToProperties() {
     <p>M1 Setup Foundation の最小UIです。</p>
     <div class="actions">
       <NuxtLink to="/companies/new">会社登録へ</NuxtLink>
+      <NuxtLink to="/tasks/new">業務設定（テンプレート/ジョブ）へ</NuxtLink>
+      <NuxtLink to="/tasks">点検ジョブ一覧へ</NuxtLink>
       <form @submit.prevent="goToProperties">
         <label>
           Company ID
