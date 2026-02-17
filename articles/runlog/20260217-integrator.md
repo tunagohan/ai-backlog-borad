@@ -518,3 +518,4 @@
 
 ### Verification
 - CIで `frontend` ジョブ時に browser install + `npm run test` を実行する構成へ変更。
+- Playwright webServer は `build + preview` 起動に変更し、CI安定性を優先。
