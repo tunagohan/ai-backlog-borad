@@ -6,6 +6,8 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "preview": "nuxt preview",
+    "test": "playwright test",
+    "test:e2e": "playwright test",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint \"**/*.{js,mjs}\"",
     "lint:stylelint": "stylelint \"**/*.{css,vue}\" --allow-empty-input",
