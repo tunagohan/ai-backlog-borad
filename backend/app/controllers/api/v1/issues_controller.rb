@@ -13,6 +13,7 @@ module Api
         issue = Issue.new(issue_params.except(:image_urls).merge(reported_at: Time.current))
         issue.image_urls_array = issue_params[:image_urls]
         issue.save!
+        create_notification_for_issue(issue, "created")
         record_audit!(
           company_id: issue.company_id,
           action: "issue_reported",
@@ -30,6 +31,7 @@ module Api
         issue.image_urls_array = update_params[:image_urls] if update_params.key?(:image_urls)
         issue.save!
         issue.update!(resolved_at: Time.current) if issue.closed? && issue.resolved_at.nil?
+        create_notification_for_issue(issue, "updated")
         record_audit!(
           company_id: issue.company_id,
           action: "issue_updated",
@@ -65,6 +67,18 @@ module Api
           created_at: issue.created_at,
           updated_at: issue.updated_at
         }
+      end
+
+      def create_notification_for_issue(issue, action)
+        level = issue.severity == "high" ? :critical : :warning
+        Notification.create!(
+          company_id: issue.company_id,
+          level: level,
+          title: "Issue #{action}",
+          message: "Issue ##{issue.id} (#{issue.title}) was #{action}.",
+          resource_type: "issue",
+          resource_id: issue.id
+        )
       end
     end
   end

@@ -4,6 +4,7 @@ class Company < ApplicationRecord
   has_many :inspection_jobs, dependent: :destroy
   has_many :issues, dependent: :destroy
   has_many :audit_logs, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates :name, presence: true
 end
