@@ -71,10 +71,3 @@ await loadJobs()
   </main>
 </template>
 
-<style scoped>
-.page { max-width: 860px; margin: 40px auto; font-family: sans-serif; padding: 0 16px; }
-.controls { display: flex; gap: 12px; align-items: end; margin-bottom: 12px; }
-.table { width: 100%; border-collapse: collapse; }
-th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-.error { color: #b3261e; }
-</style>

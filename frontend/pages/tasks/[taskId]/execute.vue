@@ -172,11 +172,3 @@ await loadJob()
   </main>
 </template>
 
-<style scoped>
-.page { max-width: 900px; margin: 32px auto; padding: 0 16px; font-family: sans-serif; }
-.card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
-.item { display: grid; gap: 8px; margin-bottom: 10px; }
-.actions { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
-.error { color: #b3261e; }
-.success { color: #1f7a39; }
-</style>

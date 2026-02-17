@@ -81,10 +81,3 @@ await load()
   </main>
 </template>
 
-<style scoped>
-.page { max-width: 900px; margin: 32px auto; padding: 0 16px; font-family: sans-serif; }
-.controls { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
-.table { width: 100%; border-collapse: collapse; }
-th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-.error { color: #b3261e; }
-</style>
