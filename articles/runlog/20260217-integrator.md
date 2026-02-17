@@ -520,3 +520,4 @@
 - CIで `frontend` ジョブ時に browser install + `npm run test` を実行する構成へ変更。
 - Playwright webServer は `build + preview` 起動に変更し、CI安定性を優先。
 - 現時点は CI安定性優先で `test:e2e` の手動実行運用に変更（`test` スクリプト連動実行は解除）。
+- frontend CIで Nuxt4 の optional native binding 欠落に備え、`oxc-*` binding を追加インストールするワークアラウンドを導入。

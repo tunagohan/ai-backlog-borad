@@ -101,6 +101,16 @@ jobs:
             npm install
           fi
 
+      - name: Install OXC bindings (Nuxt 4 workaround)
+        if: steps.detect.outputs.present == 'true'
+        working-directory: frontend
+        run: |
+          npm install --no-save \
+            @oxc-parser/binding-linux-x64-gnu \
+            @oxc-transform/binding-linux-x64-gnu \
+            @oxc-minify/binding-linux-x64-gnu \
+            || true
+
       - name: Lint (if script exists)
         if: steps.detect.outputs.present == 'true'
         working-directory: frontend
