@@ -40,9 +40,9 @@ Codex の **役割別スレッド**（PO / Design / BE / FE / Integrator / Resea
 README.md含めてこれはすべてAIが記載しています。
 
 ## 制作SS
+<img width="1920" height="830" alt="image" src="https://github.com/user-attachments/assets/5af312fd-3a49-4872-b7c7-16fbf0d45053" />
+<img width="1920" height="922" alt="image" src="https://github.com/user-attachments/assets/6bbdbcee-4c04-45f4-850d-70b7c6a1a1c5" />
+<img width="1920" height="916" alt="image" src="https://github.com/user-attachments/assets/9bf91df3-757c-4bdf-8887-f5eceb45499a" />
 
-<img width="2032" height="1162" alt="image" src="https://github.com/user-attachments/assets/4aaee659-adcb-4540-9c27-210e3b985706" />
-<img width="2032" height="1162" alt="image" src="https://github.com/user-attachments/assets/44fa2f42-231d-4727-a083-bfa1d5217a2d" />
-<img width="2032" height="1162" alt="image" src="https://github.com/user-attachments/assets/1fa9b6c6-7e4b-4da1-9741-c856b876d47d" />
 
 
