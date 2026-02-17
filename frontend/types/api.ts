@@ -127,3 +127,22 @@ export type Issue = {
   created_at: string
   updated_at: string
 }
+
+export type DashboardPropertySummary = {
+  property_id: number
+  property_name: string
+  latest_inspection_job_id: number | null
+  latest_inspection_at: string | null
+  open_issue_count: number
+}
+
+export type DashboardSummary = {
+  company_id: number
+  generated_at: string
+  totals: {
+    property_count: number
+    open_issue_count: number
+    completed_job_count: number
+  }
+  properties: DashboardPropertySummary[]
+}

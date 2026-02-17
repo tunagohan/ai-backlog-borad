@@ -16,20 +16,34 @@ module Api
 
       def create
         job = InspectionJob.create!(job_params)
+        record_audit!(
+          company_id: job.company_id,
+          action: "inspection_job_created",
+          resource_type: "inspection_job",
+          resource_id: job.id,
+          metadata: { target_type: job.target_type, target_id: job.target_id }
+        )
         render json: job_payload(job, include_template: false), status: :created
       end
 
       def start
         job = find_job
         job.update!(status: :in_progress, started_at: Time.current)
+        record_audit!(
+          company_id: job.company_id,
+          action: "inspection_job_started",
+          resource_type: "inspection_job",
+          resource_id: job.id
+        )
         render json: job_payload(job, include_template: false)
       end
 
       def save_results
         job = find_job
+        items = result_items
 
         ActiveRecord::Base.transaction do
-          result_items.each do |item|
+          items.each do |item|
             result = job.results.find_or_initialize_by(template_item_id: item[:template_item_id])
             result.assign_attributes(
               result_type: item[:result_type],
@@ -41,6 +55,14 @@ module Api
           end
         end
 
+        record_audit!(
+          company_id: job.company_id,
+          action: "inspection_results_saved",
+          resource_type: "inspection_job",
+          resource_id: job.id,
+          metadata: { results_count: items.count }
+        )
+
         render json: {
           job_id: job.id,
           results_count: job.results.count
@@ -50,6 +72,12 @@ module Api
       def complete
         job = find_job
         job.update!(status: :completed, completed_at: Time.current)
+        record_audit!(
+          company_id: job.company_id,
+          action: "inspection_job_completed",
+          resource_type: "inspection_job",
+          resource_id: job.id
+        )
         render json: job_payload(job, include_template: false)
       end
 

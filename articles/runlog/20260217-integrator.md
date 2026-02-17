@@ -245,3 +245,45 @@
 ### Failures and fixes
 - `npm ci` 直後の `npm run build` で `copy-paste` モジュール解決エラーが発生（ローカル Node 22）。
 - 修正: `npm install` を再実行して build成功を確認。
+
+---
+
+## M4 Build Update (Owner visibility and ops minimum)
+
+### Scope
+- M4対象として「オーナーダッシュボード」と「運用最低機能（health + audit）」を実装。
+
+### Backend changes
+- 追加API:
+  - `GET /api/v1/health`
+  - `GET /api/v1/dashboard?company_id=...`
+- 追加モデル/migration:
+  - `AuditLog`
+  - `20260218000011_create_audit_logs.rb`
+- 監査ログ実装:
+  - `ApplicationController` に `record_audit!` を追加
+  - テンプレート作成、ジョブ作成/開始/結果保存/完了、不具合作成/更新で監査ログ記録
+- ダッシュボード集計:
+  - 物件ごとの最新完了点検ジョブ
+  - 物件ごとの未解決不具合件数
+  - 会社全体の合計値（物件数、未解決不具合数、完了ジョブ数）
+
+### Frontend changes
+- 追加APIモジュール:
+  - `frontend/lib/api/dashboard.ts`
+- 追加画面:
+  - `/dashboard`（オーナー向けサマリー）
+- 導線更新:
+  - トップ画面にダッシュボードリンク追加
+
+### Verification
+- `cd backend && bundle exec rails db:migrate` 成功
+- `cd backend && bundle exec rails routes | rg \"api/v1/(health|dashboard|issues)\"` でルート確認
+- `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` 成功
+- `cd backend && bundle exec rails runner ...` で dashboard集計/AuditLog保存のスモーク確認
+- `cd frontend && npm install && npm run build` 成功
+
+### Failures and fixes
+- `npm ci` 実行時に `ENOTEMPTY` が発生。
+- `npm install && npm run build` 実行中に npm内部エラー（Exit handler never called）が発生。
+- 修正: `frontend/node_modules`/`.nuxt`/`.output` を再作成して再実行し、build成功を確認。

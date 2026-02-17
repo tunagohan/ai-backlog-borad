@@ -11,6 +11,13 @@ module Api
 
       def create
         issue = Issue.create!(issue_params.merge(reported_at: Time.current))
+        record_audit!(
+          company_id: issue.company_id,
+          action: "issue_reported",
+          resource_type: "issue",
+          resource_id: issue.id,
+          metadata: { severity: issue.severity, status: issue.status }
+        )
         render json: issue_payload(issue), status: :created
       end
 
@@ -18,6 +25,13 @@ module Api
         issue = Issue.find(params[:id])
         issue.update!(update_params)
         issue.update!(resolved_at: Time.current) if issue.closed? && issue.resolved_at.nil?
+        record_audit!(
+          company_id: issue.company_id,
+          action: "issue_updated",
+          resource_type: "issue",
+          resource_id: issue.id,
+          metadata: { severity: issue.severity, status: issue.status }
+        )
         render json: issue_payload(issue)
       end
 

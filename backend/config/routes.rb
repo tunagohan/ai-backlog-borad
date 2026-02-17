@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get :health, to: "health#show"
+      get :dashboard, to: "dashboard#show"
+
       resources :companies, only: %i[create show] do
         resources :properties, only: %i[index create]
       end
