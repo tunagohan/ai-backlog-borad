@@ -423,3 +423,24 @@
 - 通知チャネル拡張（メール/外部連携）の要否判定。
 - PDF帳票の要否判定。
 - 本認証/RBAC導入タイミングの計画化。
+
+---
+
+## Phase3 Step1 Update (Dashboard lead time metric)
+
+### Scope
+- オーナーダッシュボードに不具合の平均解消時間（hours）を追加する。
+
+### Backend changes
+- `GET /api/v1/dashboard(.json/.csv)` の集計項目を拡張:
+  - `totals.avg_resolution_hours`
+  - `properties[].avg_resolution_hours`
+- 計算条件:
+  - `status=closed`
+  - `reported_at` と `resolved_at` が存在
+  - 対象は `target_type=property` の issue
+
+### Frontend changes
+- `/dashboard` のタイルに「平均解消時間 (h)」を追加。
+- 一覧テーブルに「平均解消時間 (h)」列を追加。
+- `frontend/types/api.ts` に新規フィールドを追加。
