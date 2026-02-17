@@ -521,3 +521,4 @@
 - Playwright webServer は `build + preview` 起動に変更し、CI安定性を優先。
 - 現時点は CI安定性優先で `test:e2e` の手動実行運用に変更（`test` スクリプト連動実行は解除）。
 - workflow差分は最小化し、Nuxt4ビルド時の `oxc` optional binding を検査して不足時のみ補完する構成へ調整。
+- frontend CIのNodeを `22.13.0` へ更新（Nuxt4 + eslint10 のengine要件を同時に満たす）。
