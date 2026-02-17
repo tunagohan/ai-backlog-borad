@@ -7,6 +7,9 @@ const companyId = ref(1)
 const loading = ref(false)
 const errorMessage = ref('')
 const dashboard = ref<DashboardSummary | null>(null)
+const config = useRuntimeConfig()
+
+const csvDownloadUrl = computed(() => `${config.public.apiBaseUrl}/dashboard.csv?company_id=${companyId.value}`)
 
 async function loadDashboard() {
   loading.value = true
@@ -38,6 +41,7 @@ await loadDashboard()
         <input v-model.number="companyId" type="number" min="1" />
       </label>
       <button type="submit">再取得</button>
+      <a :href="csvDownloadUrl">CSVダウンロード</a>
     </form>
 
     <p v-if="loading">読み込み中...</p>
