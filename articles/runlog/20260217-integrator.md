@@ -521,3 +521,20 @@
 - 現時点は CI安定性優先で `test:e2e` の手動実行運用に変更（`test` スクリプト連動実行は解除）。
 - frontend CIの依存導入は `npm ci` 後に `npm install` を補完実行し、Nuxt4のoptional依存欠落を低減。
 - Storybook依存は本PRから除外し、次PR（Step4）で独立導入する方針へ分離。
+
+---
+
+## Phase4 Step4 Update (Storybook setup)
+
+### Scope
+- componentsテストを行うため、Storybookを導入し、最小コンポーネントと story-based test を追加。
+
+### Changes
+- `frontend/.storybook/main.ts` / `frontend/.storybook/preview.ts` を追加。
+- `frontend/package.json` に `storybook` / `build-storybook` / `test:storybook` を追加。
+- `frontend/components/ui/AppMetricCard.vue` を追加。
+- `frontend/stories/AppMetricCard.stories.ts` を追加し、`play` 関数で表示検証を実装。
+
+### Notes
+- Playwright / Storybook は依存と設定を段階分離し、PRごとに責務を限定。
+- Storybook peer conflictを避けるため、frontend CIの依存導入に `--legacy-peer-deps` を適用。
