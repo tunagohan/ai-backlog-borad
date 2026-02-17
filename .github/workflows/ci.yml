@@ -96,11 +96,11 @@ jobs:
         working-directory: frontend
         run: |
           if [ -f package-lock.json ]; then
-            npm ci || (echo "npm ci failed, syncing lockfile with npm install" && npm install)
+            npm ci --legacy-peer-deps || (echo "npm ci failed, syncing lockfile with npm install" && npm install --legacy-peer-deps)
           else
-            npm install
+            npm install --legacy-peer-deps
           fi
-          npm install --prefer-offline --no-fund --no-audit || true
+          npm install --legacy-peer-deps --prefer-offline --no-fund --no-audit || true
 
       - name: Lint (if script exists)
         if: steps.detect.outputs.present == 'true'

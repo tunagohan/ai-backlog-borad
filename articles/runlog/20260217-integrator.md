@@ -537,3 +537,4 @@
 
 ### Notes
 - Playwright / Storybook は依存と設定を段階分離し、PRごとに責務を限定。
+- Storybook peer conflictを避けるため、frontend CIの依存導入に `--legacy-peer-deps` を適用。
