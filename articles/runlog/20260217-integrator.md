@@ -464,3 +464,19 @@
 
 ### Verification
 - `cd frontend && npm run build` 成功
+
+---
+
+## Phase4 Step1 Update (Nuxt4 residual fixes)
+
+### Scope
+- `main` に追加された Nuxt4 / Nuxt UI4 導入の残対応として、CI実行条件をNuxt4要件へ合わせる。
+
+### Changes
+- `.github/workflows/ci.yml`
+  - frontend job の `actions/setup-node` を `22.12.0` へ更新（Nuxt4要件準拠）。
+  - frontend job に `npm run build` を追加し、ビルド破損をPR時に検知。
+
+### Notes
+- ローカル実行環境は Node `22.1.0` のため Nuxt4要件（`>=22.12.0`）を満たさず、ローカルbuild検証は不成立。
+- 最終判定は GitHub Actions（Node 22.12.0）で実施。
