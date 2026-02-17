@@ -147,3 +147,11 @@
 - 修正: 権限昇格で再実行し、`rack-cors` を導入完了。
 - 角括弧ルートファイル作成時に zsh glob 展開で失敗。
 - 修正: ファイルパスをクォートして再生成。
+
+### CI follow-up fixes
+- Frontend CIの依存キャッシュを `yarn.lock` 前提から `npm` 前提へ変更（`frontend/package-lock.json` を使用）。
+- Backend CIで検出された `Gemfile` の trailing empty line を削除。
+- `rubocop` の `db/schema.rb` 生成スタイル差分でCIが落ちる問題に対応し、`Layout/SpaceInsideArrayLiteralBrackets` から `db/schema.rb` を除外。
+- ローカル検証:
+  - `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` -> no offenses
+  - `cd frontend && npm run build` -> success
