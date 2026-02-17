@@ -39,6 +39,13 @@ module Api
         end
 
         template = InspectionTemplate.includes(sections: :items).find(template.id)
+        record_audit!(
+          company_id: template.company_id,
+          action: "inspection_template_created",
+          resource_type: "inspection_template",
+          resource_id: template.id,
+          metadata: { section_count: template.sections.count }
+        )
         render json: template_payload(template), status: :created
       end
 

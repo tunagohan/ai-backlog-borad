@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_18_000010) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_18_000011) do
   create_table "assets", force: :cascade do |t|
     t.integer "space_id", null: false
     t.string "name", null: false
@@ -21,6 +21,20 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_18_000010) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["space_id"], name: "index_assets_on_space_id"
+  end
+
+  create_table "audit_logs", force: :cascade do |t|
+    t.integer "company_id"
+    t.bigint "actor_user_id"
+    t.string "action", null: false
+    t.string "resource_type", null: false
+    t.bigint "resource_id"
+    t.json "metadata"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id", "created_at"], name: "index_audit_logs_on_company_id_and_created_at"
+    t.index ["company_id"], name: "index_audit_logs_on_company_id"
+    t.index ["resource_type", "resource_id"], name: "index_audit_logs_on_resource_type_and_resource_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -134,6 +148,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_18_000010) do
   end
 
   add_foreign_key "assets", "spaces"
+  add_foreign_key "audit_logs", "companies"
   add_foreign_key "inspection_jobs", "companies"
   add_foreign_key "inspection_jobs", "inspection_templates", column: "template_id"
   add_foreign_key "inspection_results", "inspection_jobs", column: "job_id"
