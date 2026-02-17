@@ -7,9 +7,9 @@
 
 ---
 
-## Current Snapshot (2026-02-17)
-- フェーズ: DISCOVERY
-- 目的: 役割別ブランチ（PO/Design/BE/FE/Research）の提案を統合し、承認判断可能な状態にする
+## Current Snapshot (2026-02-18)
+- フェーズ: BUILD（MVP実装完了 + Phase2拡張実施中）
+- 目的: MVP後の拡張（CSV / 画像添付 / 通知）を反映し、次実装の判断材料を明確化する
 - 前提: `docs/po.md` / `docs/design.md` / `docs/api.md` / `docs/frontend.md` / `docs/experiments.md` / `docs/growth.md` を統合済み
 
 ## Open Questions (未決事項一覧)
@@ -51,9 +51,18 @@
 - [Decision] 2026-02-18: Q3 テンプレートは会社共通 + version固定で実装。
 - [Decision] 2026-02-18: Q4 点検結果は結果保存API（一括保存）で実装。
 - [Decision] 2026-02-18: Q5 不具合必須項目は title/description を中心にMVP構成で実装。
-- [Decision] 2026-02-18: Q6 画像添付はMVP対象外のまま（Phase 2）。
+- [Decision] 2026-02-18: Q6 画像添付はMVP対象外として判定し、Phase2 Step2で実装完了。
 - [Decision] 2026-02-18: Q7 オーナー閲覧は画面中心（ダッシュボード/一覧）で実装。
-- [Decision] 2026-02-18: Q8 通知連携はMVP対象外のまま（Phase 2）。
+- [Decision] 2026-02-18: Q8 通知連携はMVP対象外として判定し、Phase2 Step3でアプリ内通知を実装完了（メール/外部連携は未対応）。
 - [Decision] 2026-02-18: Q9 一次ICPは複数物件オーナー想定で継続。
 - [Decision] 2026-02-18: Q10 `/health` と監査ログ（audit_logs）をMVP必須として実装。
 - [Decision] 2026-02-18: M0-M4実装が完了し、MVPの主要導線（登録 -> 設定 -> 実施 -> 不具合 -> 可視化）が成立。
+- [Decision] 2026-02-18: Phase2 Step1としてCSV出力（`GET /api/v1/dashboard.csv`）を実装完了。
+
+## Remaining Questions (post Phase2)
+
+| Order | Question | Proposal (Integrator) | Owner | 依存/影響 |
+|---|---|---|---|---|
+| 1 | 通知チャネルをどこまで拡張するか（メール/外部連携） | 先にアプリ内通知を運用し、誤検知率/利用頻度を計測してメール通知の要否を判定 | PO + Research + BE | 通知ノイズ、運用負荷 |
+| 2 | オーナー向け帳票をPDFまで対応するか | CSV運用での実利用確認後にPDFを再評価し、優先度が高い場合のみ着手 | PO + FE | 実装コスト、利用価値 |
+| 3 | 本認証（owner以外ロール含む）をいつ導入するか | MVP/Phase2の検証結果を基に、Phase3でRBAC導入計画を策定 | PO + BE + FE | セキュリティ、運用設計 |

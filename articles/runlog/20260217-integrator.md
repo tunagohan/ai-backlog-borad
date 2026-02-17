@@ -397,3 +397,29 @@
 - `cd backend && RUBOCOP_CACHE_ROOT=tmp/rubocop_cache bundle exec rubocop` 成功
 - `cd frontend && npm ci` 実行
 - `cd frontend && npm install && npm run build` 成功
+
+---
+
+## Phase2 Closeout Update (Docs integration)
+
+### Objective
+- Phase2 Step1-3完了状態を `docs/` のSSOTへ反映し、残課題を次フェーズ判断可能な形へ整理する。
+
+### Updated docs
+- `docs/decision_log.md`
+  - Current SnapshotをBUILD/Phase2反映へ更新。
+  - Q6/Q8の判断を「MVP対象外判定後にPhase2実装完了」へ更新。
+  - `Remaining Questions (post Phase2)` を追加（通知拡張/PDF/本認証）。
+- `docs/task_breakdown.md`
+  - Execution Statusへ Phase2 Step1-3 completed を追加。
+  - `Post-MVP Extension Order (Phase2)` を追加し、担当（PO/Design/BE/FE/Research）とAC/テスト観点を明記。
+
+### Who decided what
+- Integrator:
+  - MVP後の実装実績（CSV/画像添付/通知）を正式ドキュメントへ統合。
+  - 残課題を3件に再整理し、次フェーズの責任分担を提案。
+
+### Remaining tasks
+- 通知チャネル拡張（メール/外部連携）の要否判定。
+- PDF帳票の要否判定。
+- 本認証/RBAC導入タイミングの計画化。
