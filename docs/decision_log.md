@@ -44,3 +44,16 @@
 - [Proposal] 2026-02-17: PRD準拠でDISCOVERY成果を統合し、未決事項は「実装依存の強い順」で10件に整理する。
 - [Proposal] 2026-02-17: `task_breakdown` をMVPが通る順（Setup -> Foundation -> Core -> Visibility -> Ops）に再構成し、担当ロールを明確化する。
 - [Decision] 2026-02-17: 未承認（human approval待ち）。`docs/approval.md` の status は `pending` のまま維持。
+
+## Build Decisions (2026-02-18)
+- [Decision] 2026-02-18: Q1 階層スコープは Asset までMVP対象として実装完了。
+- [Decision] 2026-02-18: Q2 認証はダミーユーザー前提を維持し、将来差し替え可能なAPI構成で実装。
+- [Decision] 2026-02-18: Q3 テンプレートは会社共通 + version固定で実装。
+- [Decision] 2026-02-18: Q4 点検結果は結果保存API（一括保存）で実装。
+- [Decision] 2026-02-18: Q5 不具合必須項目は title/description を中心にMVP構成で実装。
+- [Decision] 2026-02-18: Q6 画像添付はMVP対象外のまま（Phase 2）。
+- [Decision] 2026-02-18: Q7 オーナー閲覧は画面中心（ダッシュボード/一覧）で実装。
+- [Decision] 2026-02-18: Q8 通知連携はMVP対象外のまま（Phase 2）。
+- [Decision] 2026-02-18: Q9 一次ICPは複数物件オーナー想定で継続。
+- [Decision] 2026-02-18: Q10 `/health` と監査ログ（audit_logs）をMVP必須として実装。
+- [Decision] 2026-02-18: M0-M4実装が完了し、MVPの主要導線（登録 -> 設定 -> 実施 -> 不具合 -> 可視化）が成立。
