@@ -101,6 +101,13 @@ jobs:
             npm install
           fi
 
+      - name: Ensure OXC optional bindings
+        if: steps.detect.outputs.present == 'true'
+        working-directory: frontend
+        run: |
+          node -e "import('oxc-parser').then(()=>process.exit(0)).catch(()=>process.exit(1))" \
+            || npm install --no-save @oxc-parser/binding-linux-x64-gnu @oxc-transform/binding-linux-x64-gnu @oxc-minify/binding-linux-x64-gnu
+
       - name: Lint (if script exists)
         if: steps.detect.outputs.present == 'true'
         working-directory: frontend
